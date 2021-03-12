@@ -1,0 +1,42 @@
+<html>
+<head>
+<link rel="stylesheet" href="{{ url_for('static', filename = 'css/bootstrap.min.css') }}">    
+<link rel="stylesheet" href="{{ url_for('static', filename = 'css/style.css') }}">
+<title>Sarcasm Detection</title>
+</head>
+<body>
+
+<div class='container'>
+
+{% if error %}
+<div class="alert alert-danger">{{ error }}</div>
+{% endif %}
+
+{% if msg %}
+<div class="alert alert-success">{{ msg }}</div>
+{% endif %}
+
+<div class='image'>
+<img src="{{ url_for('static', filename = 'img/tweet.png') }}">
+</div>
+<h1>Sarcasm Detection</h1> 
+<p class="lead">Simple web app to detect sarcasm based on text classifier using Logistic regression with TFIDF vectorizer</p>
+
+<form method='post' action='/api' class="form-group">
+<textarea id='tweet' placeholder='Write your comment here ...' name='tweet' class="form-control">{% if tweet%}{{ tweet }}{% endif %}
+</textarea>
+<input type='submit' value='test your comment' class="btn btn-primary">
+<button id='clearTweet' class="btn btn-danger">Clear Comment</button>
+</form>
+</div>
+
+<script>
+    clearBtn = document.getElementById("clearTweet")
+    tweet = document.getElementById("tweet")
+    clearBtn.onclick = function(e){
+        e.preventDefault()
+        tweet.value = "";
+    }
+</script>
+</body>
+</html>
